@@ -5,7 +5,7 @@ My principal goal is to detect fraudulent transactions using data and machine le
 Problem type: Binary classification (fraud = 1, non-fraud = 0)
 Objective: Build a model that predicts if a given transaction is fraudulent.
 
-2. Get the Dataset
+#2. Get the Dataset
 A commonly used dataset is from Kaggle:
 Dataset name: Credit Card Fraud Detection
 Description: European credit card transactions in September 2013
@@ -13,7 +13,7 @@ Description: European credit card transactions in September 2013
    
 Features are numerical (V1–V28 from PCA transformation) + “Amount” + “Time”
 
-4. Exploratory Data Analysis (EDA)
+#3. Exploratory Data Analysis (EDA)
 Understand the data before modeling.
 Tasks:
 Load dataset (pandas)
@@ -32,7 +32,7 @@ sns.countplot(x='Class', data=data)
 plt.title('Fraud vs Non-Fraud Transactions')
 plt.show()
 
-4. Data Preprocessing
+#4. Data Preprocessing
 Since the data is already cleaned and PCA-transformed, only minimal preprocessing is needed.
 Steps:
 Scale the Amount and Time columns using StandardScaler
@@ -53,7 +53,7 @@ X_res, y_res = sm.fit_resample(X, y)
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.3, random_state=42)
 
-5. Model Training
+#5. Model Training
 You can start with simple models, then move to more advanced ones.
 Popular algorithms:
 Logistic Regression (baseline)
@@ -66,7 +66,7 @@ from sklearn.linear_model import LogisticRegression
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
-6. Model Evaluation
+#6. Model Evaluation
 Because the data is imbalanced, accuracy alone is not enough.
 Use:
 Precision, Recall, F1-score
@@ -81,19 +81,19 @@ sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d')
 plt.title('Confusion Matrix')
 plt.show()
 
-7. Fraud Prevention Strategies (Beyond ML)
+#7. Fraud Prevention Strategies (Beyond ML)
 Detection is only one side — prevention involves:
 Real-time monitoring (e.g., anomaly detection with streaming data)
 Rules-based systems (e.g., flag transactions above certain limits)
 User verification (e.g., 2FA)
 Behavioral analysis (e.g., spending pattern deviation)
-8. Model Deployment (Optional but Impressive)
+#8. Model Deployment (Optional but Impressive)
 You can deploy your model using:
 Flask or FastAPI for backend API
 Streamlit or Gradio for an interactive dashboard
 Cloud platforms (AWS, GCP, Azure) for scalability
 
-9. Present Your Results
+#9. Present Your Results
 Include:
 Problem overview
 Dataset summary
