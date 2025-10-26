@@ -1,22 +1,25 @@
 # A-Credit-Card-Fraud-Detection-and-Prevention
 
 📍 Introduction
+
 What is this project?
 This project implements a machine learning-based system for detecting and preventing credit card fraud. It involves preprocessing transactional data, handling class imbalance, and training classification models such as Logistic Regression and Random Forest. Model performance is evaluated using metrics like accuracy, precision, recall and F1-score.
 📍 Define the Objective
+
 My principal goal is to detect fraudulent transactions using data and machine learning.
 Problem type: Binary classification (fraud = 1, non-fraud = 0)
 Objective: Build a model that predicts if a given transaction is fraudulent.
 
 #2. Get the Dataset
+
 A commonly used dataset is from Kaggle:
 Dataset name: Credit Card Fraud Detection
 Description: European credit card transactions in September 2013
 284,807 transactions 492 are fraudulent (highly imbalanced data!)
-   
 Features are numerical (V1–V28 from PCA transformation) + “Amount” + “Time”
 
 #3. Exploratory Data Analysis (EDA)
+
 Understand the data before modeling.
 Tasks:
 Load dataset (pandas)
@@ -50,24 +53,9 @@ data['Time'] = scaler.fit_transform(data[['Time']])
 
 X = data.drop('Class', axis=1)
 y = data['Class']
-# Handle imbalance
-sm = SMOTE(random_state=42)
-X_res, y_res = sm.fit_resample(X, y)
-
-
-
 #5. Model Training
 We can start with simple models, then move to more advanced ones.
 Popular algorithms:
-Logistic Regression (baseline)
-Random Forest
-XGBoost / LightGBM
-Neural Network (optional for advanced users)
-Example:
-from sklearn.linear_model import LogisticRegression
-
-model = LogisticRegression()
-model.fit(X_train, y_train)
 
 #6. Model Evaluation
 Because the data is imbalanced, accuracy alone is not enough.
@@ -75,16 +63,9 @@ Use:
 Precision, Recall, F1-score
 Confusion Matrix
 ROC-AUC Curve
-Example:
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, roc_curveimport matplotlib.pyplot as plt
-
-y_pred = model.predict(X_test)
-print(classification_report(y_test, y_pred))
-sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d')
-plt.title('Confusion Matrix')
-plt.show()
 
 #7. Fraud Prevention Strategies (Beyond ML)
+
 Detection is only one side — prevention involves:
 Real-time monitoring (e.g., anomaly detection with streaming data)
 Rules-based systems (e.g., flag transactions above certain limits)
@@ -97,6 +78,7 @@ Streamlit or Gradio for an interactive dashboard
 Cloud platforms (AWS, GCP, Azure) for scalability
 
 #9. Present Your Results
+
 Include:
 Problem overview
 Dataset summary
@@ -124,160 +106,84 @@ Combine a low-latency rule layer + online feature store + fast machine-learning 
 2.  components (real-time pipeline)
 
 Event ingestion: transactions stream into Kafka (or similar) as they happen.
-
 Feature enrichment (streaming): call or join to a Feature Store (Feast / custom) to fetch precomputed historical features and append lightweight online features computed on the fly (rolling counts, deltas). Also enrich with external lookups (BIN, geo IP).
 
 Rule engine (first pass): deterministic business rules that can instantly block/soft-decline or route to verification (e.g., amount > X for high-risk merchant, stolen-card flag). Rules reduce obvious fraud and control false positives.
 3. Features to engineer from your dataset (using V1–V28, Time, Amount)
-
 Assuming V1–V28 are anonymized PCA-like features (as in common credit-card datasets) plus Time and Amount, you should:
-
 Direct & transformed features
-
 log_amount = log(1 + Amount)
-
 time_of_day, day_of_week derived from Time
-
 zscore_amount relative to user mean/median
-
 Aggregates / velocity (computed via feature store / streaming)
-
 txn_count_1h, txn_count_24h
-
 sum_amount_24h, avg_amount_7d
-
 max_amount_30d
-
 unique_merchant_count_7d
-
 time_since_last_txn, time_between_last_2_txns
-
 Behavioral / deviation features
-
 amount_deviation = Amount / avg_amount_30d
-
 location_mismatch_flag (transaction country != last known country)
-
 device_change_flag (new device id)
-
 auth_failure_count_24h
-
 Features from the anonymized PCA columns
-
 interactions between principal components (V7*V14, etc.) and log_amount or time-of-day — tree models can capture these but include some explicit interactions if you suspect them.
-
 Anomaly & sequence features
-
 sliding-window sequence embedding (e.g., last 10 txn amounts/time deltas) for an LSTM or transformer-based sequence model (useful but heavier).
 
 4. Additional data points & external sources to integrate (priority order)
 
 These materially improve accuracy:
-
 High priority
-
 BIN / Issuer metadata: bank identification number (issuer country, bank type, issuer risk score).
-
 IP geolocation & ISP (MaxMind / IP2Location): country, distance from cardholder’s billing address, anonymity/VPN detection.
-
 Device fingerprinting: device ID, browser fingerprint, OS, app version — to detect new devices or device churn.
-
 Velocity / behavior history: account-level, card-level rolling aggregates (1h/24h/7d).
-
 Chargeback & dispute history: merchant and cardholder histories.
-
 Email / phone reputation: validation, age of email, phone carrier, whether associated with fraud lists.
-
 Merchant risk score: historical chargeback rate, industry risk bucket.
-
-Medium priority
-
 Card holder KYC signals: account age, verification status, and last verification date.
-
 3DS / SCA result: whether strong authentication succeeded or failed.
-
 Fraud blacklists: shared lists of compromised cards, devices, or IPs.
-
 Threat intel feeds: lists of known fraudulent merchants, malware IPs, Tor/VPN nodes.
-
 Advanced / long-term
-
 Graph / network data: links between card numbers, devices, IPs, phone numbers, emails to detect rings. Build entity graph and compute connected components / PageRank-like risk scores.
-
 Tokenization & EMV cryptogram data: deeper card-present signals.
-
 External financial data: merchant acquirer risk, bank-level fraud patterns.
-
 User behavioral biometrics (typing speed, swipe patterns) — privacy sensitive but useful if available.
 
-5. Models & techniques (which to use and why)
-
-Gradient-boosted trees (LightGBM / XGBoost / CatBoost) — primary supervised model: excellent accuracy, fast inference when compiled (Treelite, ONNX).
-
-Logistic regression — fast baseline for interpretability and calibration.
-
-Online / incremental learners (Vowpal Wabbit, river) — to adapt quickly to new patterns in streaming data.
-
-Anomaly detection (Isolation Forest, streaming clustering, autoencoders) — catch novel attacks that weren’t in training labels.
-
-Graph models / GNNs — detect collusion rings (use offline to score entities and precompute risk for real time).
-
-Sequence models (LSTM/transformer) — detect unusual sequences of behavior for an account (optional; heavier).
-
-Handling imbalance
-
-Use cost-sensitive learning, class weighting, focal loss, or sample-level strategies (SMOTE for offline training only) — but avoid oversampling in production; prefer calibrated probabilities and cost-aware thresholds.
-
-6. Decisioning & risk controls
+5. Decisioning & risk controls
 
 Multi-action policy: don’t only block — use graded actions: approve, soft challenge (OTP), hard challenge, hold, or decline. Soft challenges reduce false positives.
-
 Dynamic thresholds: adjust thresholds by merchant risk tier, time-of-day, and business cost function (tradeoff between false positives and fraud losses).
-
 Score calibration: ensure model probabilities are well-calibrated (Platt scaling, isotonic).
-
 Explainability: provide short, interpretable reasons with every high-risk decision for investigators and to produce automated response text for customer service.
 
-7. Evaluation & metrics (what to monitor)
 
-Model metrics (on holdout): Precision @ k, Recall, F1, ROC-AUC, PR-AUC. For skewed data prioritize Precision-Recall and cost-weighted metrics.
-
-Business metrics: Fraud loss prevented ($), false positive rate (FRR), false decline rate (customer friction), chargeback rate, investigation throughput.
-
-Operational metrics: latency (<200 ms ideally), CPU/memory costs, model uptime.
-
- 🧪 Technologies
-1. Programming Languages
+ 🧪 Technologies.
+ 
+1. Programming Languages.
 
 Python 🐍 – the primary language for data analysis, machine learning, and API development.
-
 Libraries: pandas, numpy, scikit-learn, matplotlib, seaborn, xgboost, imbalanced-learn, tensorflow/keras.
 
-🧹 2. Data Handling & Preprocessing
+🧹 2. Data Handling & Preprocessing.
 
 Pandas → for data manipulation and cleaning.
-
 NumPy → for numerical operations.
-
 Scikit-learn → for preprocessing (scaling, encoding, feature selection).
-
 Imbalanced-learn (SMOTE, ADASYN) → to handle class imbalance (fraudulent vs non-fraudulent transactions).
 
 📊 3. Data Visualization
 
 Matplotlib and Seaborn → for static EDA plots.
-
 Plotly → for interactive dashboards and visualizations.
 
 Power BI / Tableau (optional) → for business-level visualization and reporting.
 🤖 4. Machine Learning & AI
 
 Scikit-learn → for traditional models:
-
 Logistic Regression
-
 Decision Tree
-
 Random Forest
-
 Gradient Boosting
