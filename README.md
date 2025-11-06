@@ -1,14 +1,49 @@
 # A-Credit-Card-Fraud-Detection-and-Prevention
+# 📍 Introduction
 
-📍 Introduction
 What is this project?
 This project implements a machine learning-based system for detecting and preventing credit card fraud. It involves preprocessing transactional data, handling class imbalance, and training classification models such as Logistic Regression and Random Forest. Model performance is evaluated using metrics like accuracy, precision, recall and F1-score.
+
+Data storage:
+
+All recipes and ingredients are stored in a PostgreSQL cloud database hosted on Neon, offering:
+
+•	High availability
+
+•	Strong security
+
+•	Easy scalability
+
+#### Short Description:
+
+End-to-end machine learning project for detecting and preventing credit card fraud in real-time using Python, Scikit-learn, XGBoost, and visualization tools like Tableau and Power BI.
 
 📍 Define the Objective
 
 My principal goal is to detect fraudulent transactions using data and machine learning.
 Problem type: Binary classification (fraud = 1, non-fraud = 0)
 Objective: Build a model that predicts if a given transaction is fraudulent.
+
+# 🧪 Technologies
+# 🧩 Architecture
+# 🔍 Usage Example
+# 💡 Improvement Idea
+🧠 Recommended File Highlights
+A complete project overview with:
+
+Objective
+
+Dataset description
+
+Tools & technologies used
+
+How to run the project
+
+Screenshots (of plots/dashboards)
+
+Results summary
+
+Future improvements
 
 #2. Get the Dataset
 
