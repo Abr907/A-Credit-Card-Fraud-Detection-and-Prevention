@@ -1,7 +1,7 @@
 # A-Credit-Card-Fraud-Detection-and-Prevention
 # 📍 Introduction
 
-What is this project?
+What is the project?
 This project implements a machine learning-based system for detecting and preventing credit card fraud. It involves preprocessing transactional data, handling class imbalance, and training classification models such as Logistic Regression and Random Forest. Model performance is evaluated using metrics like accuracy, precision, recall and F1-score.
 
 Data storage:
@@ -52,25 +52,25 @@ else:
 
 # 🧠 Recommended File Highlights
 A complete project overview with:
-#1. Get the Dataset
-#2. Exploratory Data Analysis (EDA)
-#3. Data Preprocessing
-#4. Visualizations
-#6. Model Evaluation
-#7. Fraud Prevention Strategies (Beyond ML)
-#8. Present the Results (metrics & plots)
+# 1. Get the Dataset
+# 2. Exploratory Data Analysis (EDA)
+# 3. Data Preprocessing
+# 4. Visualizations
+# 6. Model Evaluation
+# 7. Fraud Prevention Strategies (Beyond ML)
+# 8. Present the Results (metrics & plots)
 
 # 🧩 Architecture
 
 This is what I want to have in the end:
 credit_card_fraud/
-│
-├── data/                     # Raw and processed data
-├── notebooks/                # Jupyter notebooks for EDA and modeling
-├── scripts/                  # Data preprocessing and training scripts
-├── models/                   # Trained model files (e.g., fraud_model.pkl)
-├── app/                      # Flask/FastAPI application for deployment
-└── requirements.txt 
+## │
+## ├── data/                     # Raw and processed data
+## ├── notebooks/                # Jupyter notebooks for EDA and modeling
+## ├── scripts/                  # Data preprocessing and training scripts
+## ├── models/                   # Trained model files (e.g., fraud_model.pkl)
+## ├── app/                      # Flask/FastAPI application for deployment
+## └── requirements.txt 
 
 
 # 🧪 Technologies.
@@ -102,7 +102,7 @@ Decision Tree
 Random Forest
 Gradient Boosting
 # 💻 Execution on Google Colab
-If you prefer running it online: 👉 Open: https://colab.research.google.com/drive/1BnG_8HiKfaZ9Yfepb1ZkJS_HjwWLtY0m?usp=sharing
+If you prefer running my project code: 👉 Open: https://colab.research.google.com/drive/1BnG_8HiKfaZ9Yfepb1ZkJS_HjwWLtY0m?usp=sharing
 
 Steps :
 
