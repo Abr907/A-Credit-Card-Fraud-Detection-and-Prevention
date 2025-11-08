@@ -62,14 +62,14 @@ A complete project overview with:
 
 # 🧩 Architecture
 
-This is what I want to have in the end:
-credit_card_fraud/
+This is the structure :
+## credit_card_fraud/
 ## │
-## ├── data/                     # Raw and processed data
-## ├── notebooks/                # Jupyter notebooks for EDA and modeling
-## ├── scripts/                  # Data preprocessing and training scripts
-## ├── models/                   # Trained model files (e.g., fraud_model.pkl)
-## ├── app/                      # Flask/FastAPI application for deployment
+## ├── data/                      Raw and processed data
+## ├── notebooks/                 Jupyter notebooks for EDA and modeling
+## ├── scripts/                   Data preprocessing and training scripts
+## ├── models/                   Trained model files (e.g., fraud_model.pkl)
+## ├── app/                      Flask/FastAPI application for deployment
 ## └── requirements.txt 
 
 
@@ -110,7 +110,7 @@ Upload the dataset (creditcard.csv) when prompted.
 Run all cells sequentially.
 The notebook will automatically download the /reports CSV files when finished.
 
-👨‍💻 Author
-Apolo Barnabas, Developers Institute — Tel Aviv/ Israel
+## 👨‍💻 Author
+Apolo Barnabas  Developers Institute — Tel Aviv/ Israel
 
 
