@@ -1,7 +1,7 @@
 # A-Credit-Card-Fraud-Detection-and-Prevention
 # 📍 Introduction
 
-What is the project?
+## What is the project?
 This project implements a machine learning-based system for detecting and preventing credit card fraud. It involves preprocessing transactional data, handling class imbalance, and training classification models such as Logistic Regression and Random Forest. Model performance is evaluated using metrics like accuracy, precision, recall and F1-score.
 
 Data storage:
@@ -14,7 +14,7 @@ All recipes and ingredients are stored in a PostgreSQL cloud database hosted on 
 # 📍 Define the Objective
 
 My principal goal is to detect fraudulent transactions using data and machine learning.
-Problem type: Binary classification (fraud = 1, non-fraud = 0)
+Problem type: Binary classification (fraud = 1,    non-fraud = 0)
 Objective: Build a model that predicts if a given transaction is fraudulent.
 
 # 🔍 Usage Example
@@ -51,7 +51,7 @@ else:
     print("✅ Transaction is legitimate.")
 
 # 🧠 Recommended File Highlights
-A complete project overview with:
+I completed project overview with:
 # 1. Get the Dataset
 # 2. Exploratory Data Analysis (EDA)
 # 3. Data Preprocessing
@@ -65,11 +65,11 @@ A complete project overview with:
 This is the structure :
 ## credit_card_fraud/
 ## │
-## ├── data/                      Raw and processed data
-## ├── notebooks/                 Jupyter notebooks for EDA and modeling
-## ├── scripts/                   Data preprocessing and training scripts
-## ├── models/                   Trained model files (e.g., fraud_model.pkl)
-## ├── app/                      Flask/FastAPI application for deployment
+## ├── data/                                       Raw and processed data
+## ├── notebooks/                                  Jupyter notebooks for EDA and modeling
+## ├── scripts/                                    Data preprocessing and training scripts
+## ├── models/                                     Trained model files (e.g., fraud_model.pkl)
+## ├── app/                                        Flask/FastAPI application for deployment
 ## └── requirements.txt 
 
 
